@@ -1,0 +1,70 @@
+
+
+mysql -h ip-10-1-1-204.ap-south-1.compute.internal -u bigdataedu0115 -p
+ 
+ 
+tablename testimport
+
+dbname bigdataedu0115
+
+username bigdataedu0115
+
+password  Mindpower321
+
+
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --username bigdataedu0115 --password Mindpower321 --table testimport --target-dir batch323/sqoop-jobs/job1 -m 1
+
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --table tcs326 --target-dir batch326/sqoop-jobs/job1 -m 1
+
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --table tcs326 --target-dir batch326/sqoop-jobs/job2 --columns "id, name" -m 1
+
+
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --table tcs326 --target-dir batch326/sqoop-jobs/job3 --fields-terminated-by '\t' -m 1
+
+
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 -P --table tcs326 --target-dir batch326/sqoop-jobs/job5 --as-avrodatafile -m 1
+
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --query 'SELECT * from tcs326 WHERE $CONDITIONS'--target-dir batch326/sqoop-jobs/job6
+
+
+
+
+
+sqoop export --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --table tcsexport326 --export-dir batch326/sqoop-jobs/job2/part* -m 1
+
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --table tcs326 --hbase-table hbaseimportedtable --hbase-row-key id --column-family cf1 --hbase-create-table -m 1
+
+
+
+
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --table tcs328 --target-dir batch328/sqoop-jobs/job1 -m 1
+
+
+--extract specific columns
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --table tcs328 --columns "id, name" --target-dir batch328/sqoop-jobs/job2 -m 1
+
+
+--specified own delimiter
+
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --table tcs328 --target-dir batch328/sqoop-jobs/job3 --fields-terminated-by '\t' -m 1
+
+
+--load data conditionally
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --table tcs328 --target-dir batch328/sqoop-jobs/job4 --where "id > 102" -m 1
+
+
+--free form query ( write a query to extract your data as well)
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/bigdataedu0115 --driver com.mysql.jdbc.Driver --username bigdataedu0115 --password Mindpower321 --query 'SELECT * from tcs328 WHERE $CONDITIONS'--target-dir batch328/sqoop-jobs/job5
+
